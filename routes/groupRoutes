@@ -1,0 +1,12 @@
+const express = require("express");
+const router = express.Router();
+
+const {getGroups, getGroupById, createGroup, updateGroupById, deleteGroupById } = require("../controllers/groupController");
+
+//Simplifying routes with same endpoint /
+router.route("/").get(getGroups).post(createGroup);
+
+//Simplifying routes with same endpoint /:id
+router.route("/:id").get(getGroupById).put(updateGroupById).delete(deleteGroupById)
+
+module.exports = router;

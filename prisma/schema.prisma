@@ -1,6 +1,9 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+//In terminal run npx prisma migrate dev to update shcema
+//In terminal run npx prisma studio for GUI view of data 
+
 generator client {
   provider = "prisma-client-js"
 }

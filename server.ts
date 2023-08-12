@@ -4,23 +4,30 @@ const prisma = new PrismaClient();
 
 const app = express();
 
-app.get('/', async (req: Request, res: Response) => {
-    const groupMembers = await prisma.group.findMany({
-        include: {members: true}
-    });
+//provides the parser so that we can get the body from the client
+app.use(express.json());
 
-    res.json({groupMembers})
-});
+//Group Routes import
+app.use("/api/groups", require("./routes/groupRoutes"));
 
-app.post('/', async (req: Request, res: Response) => {
-    const group = await prisma.group.create({
-        data:{
-            name:"Mesh Heads",
-            yearEst: 2023
-        }
-    })
+//Example endpoints in server
+// app.get('/', async (req: Request, res: Response) => {
+//     const groupMembers = await prisma.group.findMany({
+//         include: {members: true}
+//     });
 
-    res.json({group})
-});
+//     res.json({groupMembers})
+// });
+
+// app.post('/', async (req: Request, res: Response) => {
+//     const group = await prisma.group.create({
+//         data:{
+//             name:"Mesh Heads",
+//             yearEst: 2023
+//         }
+//     })
+
+//     res.json({group})
+// });
 
 app.listen(3001);
