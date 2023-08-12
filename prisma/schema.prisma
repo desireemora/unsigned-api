@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//MODELS
+
+//Music Group/ Alias'
+model Group{
+  id String @id @default(cuid())//collision resistant id
+  name String @db.VarChar(255)
+  yearEst Int
+  members User[]
+  genres Genre[]
+}
+
+//Genres
+model Genre{
+  id String @id @default(cuid())
+  name String
+  groups Group[]
+}
+
+//User
+model User{
+  id String @id @default(cuid())
+  first_name String @db.VarChar(255)
+  last_name String @db.VarChar(255)
+  email String @db.VarChar(255)
+  groups Group[]
+}
